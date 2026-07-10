@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>UpToGH — Upload File ke GitHub</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2220%22 fill=%22%231f5fd1%22/><text x=%2250%22 y=%2266%22 font-size=%2258%22 text-anchor=%22middle%22 fill=%22white%22 font-family=%22Arial%22>U</text></svg>" />
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<div class="page">
+
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-mark">U</span>
+      <span class="brand-name">UpToGH</span>
+    </div>
+    <div class="topbar-right">
+      <span id="userChip" class="user-chip" hidden>
+        <span id="userChipName">-</span>
+        <button id="logoutBtn" class="link-btn" type="button">Keluar</button>
+      </span>
+    </div>
+  </header>
+
+  <main class="content">
+
+    <!-- LOGIN -->
+    <section id="loginCard" class="card">
+      <h1 class="card-title">Masuk ke akun GitHub</h1>
+      <p class="card-subtitle">Gunakan username dan Personal Access Token (PAT) GitHub kamu. Token tidak disimpan di server mana pun, hanya digunakan langsung dari browser ini.</p>
+
+      <form id="loginForm" class="form" autocomplete="off">
+        <label class="field">
+          <span class="field-label">Username GitHub</span>
+          <input id="ghUsername" type="text" placeholder="contoh: rizkyrohan" required />
+        </label>
+
+        <label class="field">
+          <span class="field-label">Personal Access Token</span>
+          <input id="ghToken" type="password" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx" required />
+        </label>
+
+        <p class="hint">
+          Butuh token? Buat di
+          <a href="https://github.com/settings/tokens" target="_blank" rel="noopener">github.com/settings/tokens</a>
+          dengan izin <code>repo</code>.
+        </p>
+
+        <button type="submit" class="btn btn-primary" id="loginBtn">Masuk</button>
+        <p class="error-text" id="loginError" hidden></p>
+      </form>
+    </section>
+
+    <!-- UPLOAD -->
+    <section id="uploadCard" class="card" hidden>
+      <h1 class="card-title">Upload ke repository</h1>
+      <p class="card-subtitle">Mendukung semua jenis dokumen dan media. Jika kamu upload file <strong>.zip</strong>, kamu bisa memilih untuk mengekstraknya otomatis ke repository.</p>
+
+      <form id="uploadForm" class="form" autocomplete="off">
+        <label class="field">
+          <span class="field-label">Nama repository</span>
+          <input id="repoName" type="text" placeholder="contoh: dokumen-saya" required />
+          <span class="field-help">Jika repository belum ada, akan dibuat otomatis.</span>
+        </label>
+
+        <label class="field">
+          <span class="field-label">Pilih file</span>
+          <div class="dropzone" id="dropzone">
+            <input id="fileInput" type="file" multiple />
+            <div class="dropzone-inner">
+              <span class="dropzone-title" id="dropzoneTitle">Klik atau seret file ke sini</span>
+              <span class="dropzone-sub">Semua jenis dokumen &amp; media didukung</span>
+            </div>
+          </div>
+        </label>
+
+        <div class="toggle-row" id="zipToggleRow" hidden>
+          <label class="switch">
+            <input type="checkbox" id="zipToggle" />
+            <span class="slider"></span>
+          </label>
+          <div class="toggle-text">
+            <span class="toggle-title">Ekstrak ZIP</span>
+            <span class="toggle-sub">Aktifkan untuk mengekstrak isi file .zip langsung ke repository</span>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary" id="uploadBtn">Upload</button>
+      </form>
+
+      <div class="progress-box" id="progressBox" hidden>
+        <div class="progress-bar-track">
+          <div class="progress-bar-fill" id="progressFill"></div>
+        </div>
+        <p class="progress-label" id="progressLabel">Menyiapkan upload...</p>
+        <ul class="log-list" id="logList"></ul>
+      </div>
+
+      <div class="result-box" id="resultBox" hidden>
+        <span class="result-icon">✓</span>
+        <div class="result-text">
+          <span class="result-title">Upload selesai</span>
+          <a id="resultLink" class="result-link" href="#" target="_blank" rel="noopener"></a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <p>© 2026 rizky rohan — UpToGH</p>
+  </footer>
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script type="module" src="app.js"></script>
+</body>
+</html>
